@@ -1,0 +1,25 @@
+[alias]
+    st = status
+    co = checkout
+    br = branch
+    p = rebase
+    ci = commit
+    gr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches
+    ol = log --oneline
+
+[user]
+    name = Alfonso Lima Astor
+    email = alfonsolimaastor@gmail.com
+
+[color]
+    diff = auto
+    ui = auto
+    interactive = auto
+    grep = always
+
+[color "grep"]
+    match = red
+
+[core]
+    editor = vim
+
