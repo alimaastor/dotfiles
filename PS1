@@ -11,12 +11,18 @@ function __setprompt {
     local SMILEY="${GREEN}:)${NORMAL}"
     local FROWNY="${RED}:(${NORMAL}"
 
-    local CURRENT_DIR="${INVERT}[ \w ]${NORMAL}"
+    if [ -n "$SSH_CLIENT" ]; then
+        local MACHINE=`uname -n`
+        local HEADER="${INVERT}[ $USER@$MACHINE:\w ]${NORMAL}"
+    else
+        local HEADER="${INVERT}[ \w ]${NORMAL}"
+    fi
+
     local PROMPT="${GREEN}>${NORMAL}${YELLOW}>${NORMAL}${RED}>${NORMAL}"
 
     local SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
 
-    PS1="${CURRENT_DIR}\n\`${SELECT}\` ${PROMPT} "
+    PS1="${HEADER}\n\`${SELECT}\` ${PROMPT} "
 }
 
 __setprompt
