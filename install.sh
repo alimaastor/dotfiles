@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CWD=`pwd`
 
@@ -43,7 +43,7 @@ function configure_vim {
         echo "vim is not installed, skipping vim configuration & plugins" ...
     fi
 }
- 
+
 # gitconfig
 function configure_git {
     local GITCONFIG="$HOME/.gitconfig"
@@ -59,17 +59,18 @@ function configure_git {
 
 # PS1
 function format_ps1 {
-    if [ -e $BASHRC ]; then
+    if [ -z $BASHRC ]; then
+        BASHRC="$HOME/.bashrc"
+    fi
 
+    if [ -e $BASHRC ]; then
         # Get total number of lines to append to .bashrc to check whether we have already modified it.
         local N_LINES=$(cat $CWD/PS1 | wc -l)
 
-        if [ $(tail -$N_LINES $HOME/.bashrc | diff $CWD/PS1 -) ]; then
+        DIFFERENT=$(tail -$N_LINES $BASHRC | diff $CWD/PS1 - | wc -l)
+        if [ $DIFFERENT -ne 0 ]; then
             # Then PS1 has not been configured yet.
             # FIXME: if user appends something else to this file, previous command won't work!
-            if [ -z $BASHRC ]; then
-                BASHRC="$HOME/.bashrc"
-            fi
 
             cat $CWD/PS1 >> $BASHRC
         else

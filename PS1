@@ -1,21 +1,21 @@
 function __setprompt {
     local RESET="\[\017\]"
-    
+
     local INVERT="\[\033[7;1m\]"
     local NORMAL="\[\033[0m\]"
     local RED="\[\033[31;1m\]"
     local YELLOW="\[\033[33;1m\]"
     local WHITE="\[\033[37;1m\]"
     local GREEN="\[\033[32;1m\]"
-    
+
     local SMILEY="${GREEN}:)${NORMAL}"
     local FROWNY="${RED}:(${NORMAL}"
-    
+
     local CURRENT_DIR="${INVERT}[ \w ]${NORMAL}"
     local PROMPT="${GREEN}>${NORMAL}${YELLOW}>${NORMAL}${RED}>${NORMAL}"
-    
+
     local SELECT="if [ \$? = 0 ]; then echo \"${SMILEY}\"; else echo \"${FROWNY}\"; fi"
-    
+
     PS1="${CURRENT_DIR}\n\`${SELECT}\` ${PROMPT} "
 }
 
