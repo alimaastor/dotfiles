@@ -1,4 +1,4 @@
-function __setprompt {
+function __setprompt() {
     local RESET="\[\017\]"
 
     local INVERT="\[\033[7;1m\]"

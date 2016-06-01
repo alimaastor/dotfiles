@@ -3,7 +3,7 @@
 CWD=`pwd`
 
 # vim
-function configure_vim {
+function configure_vim() {
     if command -v vim > /dev/null 2>&1; then
         # Install pathogen if not installed yet.
         local AUTOLOAD_DIR=$HOME/.vim/autoload/
@@ -45,7 +45,7 @@ function configure_vim {
 }
 
 # gitconfig
-function configure_git {
+function configure_git() {
     local GITCONFIG="$HOME/.gitconfig"
 
     if [ -e $GITCONFIG ]; then
@@ -58,7 +58,7 @@ function configure_git {
 }
 
 # PS1
-function format_ps1 {
+function format_ps1() {
     if [ -z $BASHRC ]; then
         BASHRC="$HOME/.bashrc"
     fi
@@ -82,7 +82,7 @@ function format_ps1 {
     fi
 }
 
-function usage {
+function usage() {
     echo "Usage: $0 [option/s] ";
     echo "";
     echo "options:";
