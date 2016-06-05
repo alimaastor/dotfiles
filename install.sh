@@ -40,7 +40,7 @@ function configure_vim() {
         cp $CWD/vimrc $VIMRC
 
     else
-        echo "vim is not installed, skipping vim configuration & plugins" ...
+        echo "vim is not installed, skipping vim configuration & plugins ..."
     fi
 }
 
@@ -54,24 +54,43 @@ function configure_git() {
         fi
         mv $GITCONFIG $GITCONFIG.bkp
     fi
+
+    echo copying git config file ...
     cp $CWD/gitconfig $GITCONFIG
 }
 
 # PS1
 function format_ps1() {
     if [ -z $BASHRC ]; then
-        BASHRC="$HOME/.bashrc"
+        local BASHRC=""
+        if [ -f $HOME/.bashrc ]; then
+            BASHRC="$HOME/.bashrc"
+        elif [ -f $HOME/.profile ]; then
+            BASHRC="$HOME/.profile"
+        fi
     fi
 
     if [ -e $BASHRC ]; then
-        # Get total number of lines to append to .bashrc to check whether we have already modified it.
-        local N_LINES=$(cat $CWD/PS1 | wc -l)
 
-        DIFFERENT=$(tail -$N_LINES $BASHRC | diff $CWD/PS1 - | wc -l)
-        if [ $DIFFERENT -ne 0 ]; then
-            # Then PS1 has not been configured yet.
-            # FIXME: if user appends something else to this file, previous command won't work!
+        local CONFIGURED="false"
+        local LEN_BASHRC=`cat $BASHRC | wc -l`
+        local LEN_PS1=`cat $CWD/PS1 | wc -l`
 
+        if [ $LEN_BASHRC -gt $LEN_PS1 ]; then
+            local MAX=$(($LEN_BASHRC-$LEN_PS1+2))
+            i=1; while [ "$i" -lt $MAX ]; do
+                j=$(($i+$LEN_PS1-1))
+                if [ $(sed -n "${i},${j}p" $BASHRC | diff $CWD/PS1 - | wc -l) -ne 0 ]; then
+                    i=$((i+1))
+                else
+                    CONFIGURED="true"
+                    i=$MAX
+                fi
+            done
+        fi
+
+        if [ "$CONFIGURED" = "false" ]; then
+            echo configuring $BASHRC ...
             cat $CWD/PS1 >> $BASHRC
         else
             echo PS1 is already configured
@@ -111,5 +130,4 @@ else
     format_ps1
     configure_vim
 fi
-
 
