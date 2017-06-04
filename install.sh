@@ -101,6 +101,11 @@ function format_ps1() {
     fi
 }
 
+function configure_urxvt() {
+    echo "configure_urxvt: $CWD/Xdefaults -> ~/.Xdefaults"
+    cp $CWD/Xdefaults ~/.Xdefaults
+}
+
 function usage() {
     echo "Usage: $0 [option/s] ";
     echo "";
@@ -108,6 +113,7 @@ function usage() {
     echo "--configure-git   Install ~/.gitconfig from our gitconfig file";
     echo "--format-ps1      Append PS1 file content to ~/.bashrc if not done yet.";
     echo "--configure-vim   Install ~/.vimrc from our vimrc file and install pathogen, NERDTree and ctrlp.";
+    echo "--configure-urxvt Install ~/.Xdefaults";
     echo "--help            Display this message and exit.";
     echo "";
     exit 1;
@@ -121,6 +127,7 @@ if [ "$#" -ne 0 ]; then
             "--configure-git")  configure_git; ;;
             "--format-ps1")     format_ps1; ;;
             "--configure-vim")  configure_vim; ;;
+            "--configure-urxvt") configure_urxvt; ;;
             "--help")           usage; exit 1 ;;
             *)                  echo ERROR: wrong argument; usage; exit 1 ;;
         esac
@@ -129,5 +136,6 @@ else
     configure_git
     format_ps1
     configure_vim
+    configure_urxvt
 fi
 
