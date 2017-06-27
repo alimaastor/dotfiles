@@ -9,8 +9,14 @@ function configure_vim() {
         local AUTOLOAD_DIR=$HOME/.vim/autoload/
         local BUNDLE_DIR=$HOME/.vim/bundle
         if [ ! -f $AUTOLOAD_DIR/pathogen.vim ]; then
-            mkdir -p $AUTOLOAD_DIR $BUNDLE_DIR && \
-            curl -LSso $AUTOLOAD_DIR/pathogen.vim https://tpo.pe/pathogen.vim
+            # Check if curl is installed.
+            which curl > /dev/null
+            if [ "$?" == "0" ]; then
+                mkdir -p $AUTOLOAD_DIR $BUNDLE_DIR && \
+                curl -LSso $AUTOLOAD_DIR/pathogen.vim https://tpo.pe/pathogen.vim
+            else
+                echo "Error: curl is not installed"
+            fi
         else
             echo Pathogen is already installed.
         fi
