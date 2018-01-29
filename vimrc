@@ -1,7 +1,11 @@
 set encoding=utf-8
 set fileencoding=utf-8
 
+set backspace=indent,eol,start
+
 execute pathogen#infect()
+
+syntax on
 
 set number
 set background=dark
@@ -16,12 +20,16 @@ filetype plugin indent on
 " key is pressed
 set tabstop=4
 " change the number of space characters inserted for indentation
-set shiftwidth=4
+" set shiftwidth=4
 " insert space characters whenever the tab key is pressed
-set expandtab
+" set expandtab
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+" enable line numbers
+let NERDTreeShowLineNumbers=1
+
+let g:NERDTreeWinSize=50
 " Start NERDTree
 autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
