@@ -10,6 +10,8 @@ syntax on
 set number
 set background=dark
 
+colorscheme codedark
+
 " show trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -20,9 +22,9 @@ filetype plugin indent on
 " key is pressed
 set tabstop=4
 " change the number of space characters inserted for indentation
-" set shiftwidth=4
+set shiftwidth=4
 " insert space characters whenever the tab key is pressed
-" set expandtab
+set expandtab
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 

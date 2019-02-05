@@ -35,6 +35,13 @@ function configure_vim() {
             echo ctrlp already installed
         fi
 
+        # Install vim-code-dark
+        if [ ! -d $BUNDLE_DIR/vim-code-dark ]; then
+            (cd $BUNDLE_DIR && git clone https://github.com/tomasiser/vim-code-dark.git)
+        else
+            echo ctrlp already installed
+        fi
+
         # Install vimrc file
         local VIMRC=$HOME/.vimrc
         if [ -e $VIMRC ]; then
