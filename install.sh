@@ -39,7 +39,14 @@ function configure_vim() {
         if [ ! -d $BUNDLE_DIR/vim-code-dark ]; then
             (cd $BUNDLE_DIR && git clone https://github.com/tomasiser/vim-code-dark.git)
         else
-            echo ctrlp already installed
+            echo vim-code-dark is already installed
+        fi
+
+        # Install vim-fugitive
+        if [ ! -d $BUNDLE_DIR/vim-fugitive ]; then
+            (cd $BUNDLE_DIR && git clone https://github.com/tpope/vim-fugitive.git && vim -u NONE -c "helptags vim-fugitive/doc" -c q)
+        else
+            echo vim-fugitive is already installed
         fi
 
         # Install vimrc file
