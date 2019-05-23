@@ -49,6 +49,13 @@ function configure_vim() {
             echo vim-fugitive is already installed
         fi
 
+        # Install indentLine
+        if [ ! -d $BUNDLE_DIR/vim-fugitive ]; then
+            (cd $BUNDLE_DIR && git clone https://github.com/Yggdroot/indentLine.git)
+        else
+            echo indentLine is already installed
+        fi
+
         # Install vimrc file
         local VIMRC=$HOME/.vimrc
         if [ -e $VIMRC ]; then

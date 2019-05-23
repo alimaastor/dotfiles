@@ -9,11 +9,13 @@ syntax on
 
 set number
 set background=dark
+set colorcolumn=120
 
 colorscheme codedark
 
 " show trailing spaces
 highlight ExtraWhitespace ctermbg=red guibg=red
+hi Search ctermbg=DarkMagenta
 match ExtraWhitespace /\s\+$/
 
 filetype plugin indent on
@@ -31,7 +33,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " enable line numbers
 let NERDTreeShowLineNumbers=1
 
-let g:NERDTreeWinSize=50
+let g:NERDTreeWinSize=40
 " Start NERDTree
 autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
@@ -60,3 +62,11 @@ set noswapfile
 
 set list
 set listchars=tab:>-,trail:•,extends:»,precedes:«,nbsp:¬
+
+" opens search results in a window w/ links and highlight the matches
+command! -nargs=+ Grep execute 'silent grep! -I -r -n --exclude *.{bin,hex,pyc} . -e <args>' | copen | execute 'silent /<args>'
+" shift-control-* Greps for the word under the cursor
+:nmap <leader>g :Grep <c-r>=expand("<cword>")<cr><cr>
+
+let g:indentLine_char = '┊'
+let g:indentLine_color_term = 239
