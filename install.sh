@@ -128,9 +128,22 @@ function format_ps1() {
     fi
 }
 
-function configure_urxvt() {
-    echo "configure_urxvt: $CWD/Xdefaults -> ~/.Xdefaults"
-    cp $CWD/Xdefaults ~/.Xdefaults
+function configure_tmux() {
+    # Install vimrc file
+    local TMUX_CFG=$HOME/.tmux.cfg
+    if [ -e $TMUX_CFG ]; then
+        if [ -e $TMUX_CFG.bkp ]; then
+            echo overriding previous .tmux.cfg backup file
+        fi
+        mv $TMUX_CFG $TMUX_CFG.bkp
+    fi
+
+    # Install tmux themepack
+    if [ ! -d ~/.tmux-themepack ]; then
+        git clone git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
+    else
+        echo tmux themepack is already installed
+    fi
 }
 
 function usage() {
@@ -139,8 +152,8 @@ function usage() {
     echo "options:";
     echo "--configure-git   Install ~/.gitconfig from our gitconfig file";
     echo "--format-ps1      Append PS1 file content to ~/.bashrc if not done yet.";
-    echo "--configure-vim   Install ~/.vimrc from our vimrc file and install pathogen, NERDTree and ctrlp.";
-    echo "--configure-urxvt Install ~/.Xdefaults";
+    echo "--configure-vim   Install ~/.vimrc from our vimrc file and install plugins.";
+    echo "--configure-tmux  Install ~/.tmux.conf from our vimrc file and install plugins.";
     echo "--help            Display this message and exit.";
     echo "";
     exit 1;
@@ -154,7 +167,7 @@ if [ "$#" -ne 0 ]; then
             "--configure-git")  configure_git; ;;
             "--format-ps1")     format_ps1; ;;
             "--configure-vim")  configure_vim; ;;
-            "--configure-urxvt") configure_urxvt; ;;
+            "--configure-tmux") configure_tmux; ;;
             "--help")           usage; exit 1 ;;
             *)                  echo ERROR: wrong argument; usage; exit 1 ;;
         esac
@@ -163,6 +176,6 @@ else
     configure_git
     format_ps1
     configure_vim
-    configure_urxvt
+    configure_tmux
 fi
 
