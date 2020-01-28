@@ -135,7 +135,6 @@ function usage() {
     echo "--configure-git   Install ~/.gitconfig from our gitconfig file";
     echo "--format-ps1      Append PS1 file content to ~/.bashrc if not done yet.";
     echo "--configure-vim   Install ~/.vimrc from our vimrc file and install plugins.";
-    echo "--configure-tmux  Install ~/.tmux.conf from our vimrc file and install plugins.";
     echo "--help            Display this message and exit.";
     echo "";
     exit 1;
@@ -149,7 +148,6 @@ if [ "$#" -ne 0 ]; then
             "--configure-git")  configure_git; ;;
             "--format-ps1")     format_ps1; ;;
             "--configure-vim")  configure_vim; ;;
-            "--configure-tmux") configure_tmux; ;;
             "--help")           usage; exit 1 ;;
             *)                  echo ERROR: wrong argument; usage; exit 1 ;;
         esac
