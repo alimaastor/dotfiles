@@ -50,7 +50,7 @@ function configure_vim() {
         fi
 
         # Install indentLine
-        if [ ! -d $BUNDLE_DIR/vim-fugitive ]; then
+        if [ ! -d $BUNDLE_DIR/indentline ]; then
             (cd $BUNDLE_DIR && git clone https://github.com/Yggdroot/indentLine.git)
         else
             echo indentLine is already installed
@@ -128,24 +128,6 @@ function format_ps1() {
     fi
 }
 
-function configure_tmux() {
-    # Install vimrc file
-    local TMUX_CFG=$HOME/.tmux.cfg
-    if [ -e $TMUX_CFG ]; then
-        if [ -e $TMUX_CFG.bkp ]; then
-            echo overriding previous .tmux.cfg backup file
-        fi
-        mv $TMUX_CFG $TMUX_CFG.bkp
-    fi
-
-    # Install tmux themepack
-    if [ ! -d ~/.tmux-themepack ]; then
-        git clone git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
-    else
-        echo tmux themepack is already installed
-    fi
-}
-
 function usage() {
     echo "Usage: $0 [option/s] ";
     echo "";
@@ -176,6 +158,5 @@ else
     configure_git
     format_ps1
     configure_vim
-    configure_tmux
 fi
 
