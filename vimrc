@@ -39,6 +39,8 @@ autocmd VimEnter * NERDTree
 " Go to previous (last accessed) window.
 autocmd VimEnter * wincmd p
 
+set conceallevel=0 " don't hide quotation marks in json files
+
 set hidden " It hides buffers instead of closing them. This means that you can have
            " unwritten changes to a file and open a new file using :e, without being
            " forced to write or undo your changes first. Also, undo buffers and marks
@@ -60,7 +62,8 @@ set undolevels=1000      " use many muchos levels of undo
 set nobackup
 set noswapfile
 
-set mouse=a
+"set mouse=a
+set relativenumber
 
 set list
 set listchars=tab:>-,trail:•,extends:»,precedes:«,nbsp:¬
@@ -72,3 +75,9 @@ command! -nargs=+ Grep execute 'silent grep! -I -r -n --exclude *.{bin,hex,pyc} 
 
 let g:indentLine_char = '┊'
 let g:indentLine_color_term = 239
+
+" Use the "black hole register", "_ to really delete something and not
+" override the default register ""
+nnoremap d "_d
+vnoremap d "_d
+
