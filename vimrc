@@ -63,7 +63,7 @@ set nobackup
 set noswapfile
 
 "set mouse=a
-set relativenumber
+"set relativenumber
 
 set list
 set listchars=tab:>-,trail:•,extends:»,precedes:«,nbsp:¬
